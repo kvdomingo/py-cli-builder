@@ -1,0 +1,21 @@
+version: '3'
+
+env:
+  DOCKER_IMAGE_NAME: py-cli-builder
+
+tasks:
+  build-builder:
+    desc: Build builder image
+    cmds:
+      - docker build -t kvdomingo/{{.DOCKER_IMAGE_NAME}}:latest .
+
+  publish-builder:
+    desc: Push builder image to Docker Hub
+    cmds:
+      - docker push kvdomingo/{{.DOCKER_IMAGE_NAME}}:latest
+
+  default:
+    desc: Build and push builder image
+    cmds:
+      - task build-builder
+      - task publish-builder
