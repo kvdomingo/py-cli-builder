@@ -13,5 +13,5 @@ WORKDIR /build
 
 ENTRYPOINT [ "/bin/sh", \
              "-c", \
-             "poetry export -f requirements.txt --with dev --without-hashes && \
+             "poetry install && \
               exec pyinstaller -F --clean --name $NAME setup.py" ]
