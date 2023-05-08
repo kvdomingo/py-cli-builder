@@ -3,7 +3,7 @@ FROM python:3.10-bullseye
 ENV DEBIAN_FRONTEND noninteractive
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
-ENV POETRY_VERSION 1.2.2
+ENV POETRY_VERSION 1.4.2
 
 RUN apt-get update && apt-get install upx-ucl -y
 

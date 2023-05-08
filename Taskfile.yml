@@ -1,5 +1,8 @@
 version: '3'
 
+dotenv:
+  - .env
+
 env:
   DOCKER_IMAGE_NAME: py-cli-builder
 
@@ -8,11 +11,15 @@ tasks:
     desc: Build builder image
     cmds:
       - docker build -t kvdomingo/{{.DOCKER_IMAGE_NAME}}:latest .
+      - docker tag kvdomingo/{{.DOCKER_IMAGE_NAME}} ghcr.io/kvdomingo/{{.DOCKER_IMAGE_NAME}}
 
   publish-builder:
-    desc: Push builder image to Docker Hub
+    desc: Push builder image
     cmds:
+      - echo $DOCKER_CR_PAT | docker login -u kvdomingo --password-stdin
       - docker push kvdomingo/{{.DOCKER_IMAGE_NAME}}:latest
+      - echo $GITHUB_CR_PAT | docker login ghcr.io -u kvdomingo --password-stdin
+      - docker push ghcr.io/kvdomingo/{{.DOCKER_IMAGE_NAME}}:latest
 
   default:
     desc: Build and push builder image
