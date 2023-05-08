@@ -14,6 +14,5 @@ docker run \
   --rm \
   --env NAME={{.NAME}} \
   --name {{.NAME}} \
-  --workdir /build \
-  kvdomingo/py-cli-builder:latest
+  ghcr.io/kvdomingo/py-cli-builder:latest
 ```
